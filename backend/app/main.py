@@ -1,14 +1,17 @@
 from fastapi import FastAPI
 from dotenv import load_dotenv
+from app.api import search
 
-# Carga las variables de entorno desde .env
 load_dotenv()
 
 app = FastAPI(
     title="SnapBuy API",
     description="Backend para búsqueda visual de productos",
-    version="0.1.0"    
+    version="0.1.0"
 )
+
+# Rutas
+app.include_router(search.router, prefix="/api/v1", tags=["search"])
 
 @app.get("/")
 def root():
