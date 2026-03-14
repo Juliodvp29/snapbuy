@@ -1,8 +1,13 @@
 from fastapi import FastAPI
 from dotenv import load_dotenv
 from app.api import search
+from app.database import engine, Base
+from app.models import models
 
 load_dotenv()
+
+# Crear tablas en PostgreSQL
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="SnapBuy API",
